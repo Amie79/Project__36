@@ -9,7 +9,7 @@ function preload()
 }
 
 function setup() {
-	createCanvas(1000, 500);
+createCanvas(1000, 500);
   dog=createSprite(800,250,50,40);
   dog.addImage(dog_img);
   dog.scale=0.30;
@@ -18,9 +18,17 @@ function setup() {
   foodStock.on("value",readStock);
  // bottles=20;
 
+  foodObj=new Food();
+  foodStock=database.ref('Food');
+  foodStock.on("value",function(data){ 
+  foodS=data.val();
+  foodObj.updateFoodStock(foodS); 
+      });
+
   fedTime=database.ref('FeedTime');
   fedTime.on("value",function(data){
   
+    
     lastFed=data.val();
   });
 
